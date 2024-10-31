@@ -87,15 +87,16 @@ init () =
 
 -- UPDATE
 
+
 loadDialog : String -> String -> ( Model, Cmd Msg )
 loadDialog face source =
     case Dialog.init face source of
         ( mdl, cmd ) ->
             ( { flavor = Theme.Latte
-            , height = 480
-            , screen = DialogScreen mdl
-            , width = 720
-            }
+              , height = 480
+              , screen = DialogScreen mdl
+              , width = 720
+              }
             , Browser.Dom.getViewport
                 |> Task.perform
                     (\viewport ->
@@ -115,13 +116,13 @@ update msg model =
     case msg of
         OnClickSeedSeller ->
             loadDialog "/static/villager_image.png" "seed_seller.txt"
-        
+
         OnClickCastle ->
             loadDialog "/static/king.png" "test.txt"
 
         OnClickPope ->
             loadDialog "/static/villager_image.png" "seed_seller.txt"
-        
+
         OnClickHouses ->
             loadDialog "/static/villager_image.png" "seed_seller.txt"
 
@@ -135,7 +136,7 @@ update msg model =
                                     ( { model | screen = DialogScreen newMdl }
                                     , Cmd.map OnDialogScreen cmd
                                     )
-                                
+
                                 Nothing ->
                                     ( { model | screen = TownScreen Town.init }
                                     , Cmd.none

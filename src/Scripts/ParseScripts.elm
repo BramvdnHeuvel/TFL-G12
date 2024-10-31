@@ -74,6 +74,7 @@ dialogSectionParser =
                 |. P.symbol "]"
                 |. P.spaces
                 |. messageParser
+
             -- , P.succeed (\t m -> [ SetTown t, Message m ])
             --     |. P.keyword "set-town"
             --     |. P.spaces
@@ -86,7 +87,6 @@ dialogSectionParser =
             --     |. P.symbol "]"
             --     |. P.spaces
             --     |= messageParser
-
             -- NOTE: Ignored because nothing happens after a goto
             , P.succeed (\m -> [ EndOfSentence, Message m ])
                 |. P.symbol "]"

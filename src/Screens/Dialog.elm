@@ -268,7 +268,8 @@ viewDebugScreen data =
 viewNPC : { face : String, height : Int, onClick : msg, width : Int } -> Element msg
 viewNPC data =
     let
-        characterImage = data.face
+        characterImage =
+            data.face
 
         -- Update with the correct path to your uploaded image
         -- Use Element.Background.image to create a background image style

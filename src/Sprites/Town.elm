@@ -63,21 +63,21 @@ update msg model =
                     ( { model | selectionBoxCastle = mdl }
                     , Cmd.none
                     )
-        
+
         OnSFarm1 m ->
             case SelectionBox.update m model.selectionBoxFarm1 of
                 mdl ->
                     ( { model | selectionBoxFarm1 = mdl }
                     , Cmd.none
                     )
-        
+
         OnSFarm2 m ->
             case SelectionBox.update m model.selectionBoxFarm2 of
                 mdl ->
                     ( { model | selectionBoxFarm2 = mdl }
                     , Cmd.none
                     )
-        
+
         OnHouses m ->
             case SelectionBox.update m model.selectionBoxHouses of
                 mdl ->
