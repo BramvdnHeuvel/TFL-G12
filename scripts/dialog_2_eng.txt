@@ -1,0 +1,8 @@
+[goto S]//Dialogue 2 Rome
+//Pope Leo III
+[S]A thousand thanks, my friends, for the deliverance of these evildoers. May God grant them graces and get them back on the right path.[]
+You undoubtedly know me. I am Pope Leo III, head of the Catholic Church. My special task is to care for the Church and the people of Rome.[]
+I am the Pope of Rome and therefore I have been chosen to decide on important religious matters. People have much admiration for my beautiful robes and expensive jewelry together with my staff and my hat. These also indicate the position I have within the Church.[]
+Aha, I see that you have brought someone with you with you with you with you with you. May he endure all his coming trials.[]
+I want to tackle the unrest within the Church and I can certainly use the extra pair of hands that you have brought with you, Karel.[]
+I have an assignment for you: Travel to one of the churches in Rome and speak to the bishop there. He can probably tell where all the unrest comes from.[end]
