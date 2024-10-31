@@ -26,7 +26,7 @@ type Error
 downloadScript : { name : String, toMsg : Msg -> msg } -> Cmd msg
 downloadScript { name, toMsg } =
     Http.get
-        { url = "/scripts/" ++ name
+        { url = "/TFL-G12/scripts/" ++ name
         , expect =
             Result.mapError HttpFailure
                 >> Result.andThen (Scripts.ParseScripts.fromString >> Result.mapError ParserFailure)

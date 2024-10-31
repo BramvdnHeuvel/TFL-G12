@@ -115,16 +115,16 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         OnClickSeedSeller ->
-            loadDialog "/static/villager_image.png" "seed_seller.txt"
+            loadDialog "/TFL-G12/static/villager_image.png" "seed_seller.txt"
 
         OnClickCastle ->
-            loadDialog "/static/king.png" "dialog_1_eng.txt"
+            loadDialog "/TFL-G12/static/king.png" "dialog_1_eng.txt"
 
         OnClickPope ->
-            loadDialog "/static/pope.png" "dialog_2_eng.txt"
+            loadDialog "/TFL-G12/static/pope.png" "dialog_2_eng.txt"
 
         OnClickHouses ->
-            loadDialog "/static/nun.png" "dialog_7_nl.txt"
+            loadDialog "/TFL-G12/static/nun.png" "dialog_7_nl.txt"
 
         OnDialogScreen m ->
             case model.screen of
