@@ -23,6 +23,7 @@ type DialogPiece
     | FlagSpot Flag
     | GoTo Flag
     | Message String
+    | SetTown String
 
 
 type alias Flag =
@@ -73,6 +74,18 @@ dialogSectionParser =
                 |. P.symbol "]"
                 |. P.spaces
                 |. messageParser
+            , P.succeed (\t m -> [ SetTown t, Message m ])
+                |. P.keyword "set-town"
+                |. P.spaces
+                |= P.variable
+                    { start = Char.isAlpha
+                    , inner = Char.isAlphaNum
+                    , reserved = Set.empty
+                    }
+                |. P.spaces
+                |. P.symbol "]"
+                |. P.spaces
+                |= messageParser
 
             -- NOTE: Ignored because nothing happens after a goto
             , P.succeed (\m -> [ EndOfSentence, Message m ])
@@ -164,13 +177,13 @@ nextPiece =
         )
 
 
-view : DialogState -> { text : String, options : List ( Flag, String ) }
+view : DialogState -> { text : String, options : List ( Flag, String ), setTown : Maybe String }
 view dialog =
     Recursion.runRecursion
         (\d ->
             case d of
                 [] ->
-                    Recursion.base { text = "", options = [] }
+                    Recursion.base { text = "", options = [], setTown = Nothing }
 
                 (Choice flag message) :: tail ->
                     Recursion.recurseThen tail
@@ -179,10 +192,10 @@ view dialog =
                         )
 
                 EndOfDialogue :: _ ->
-                    Recursion.base { text = "", options = [] }
+                    Recursion.base { text = "", options = [], setTown = Nothing }
 
                 EndOfSentence :: _ ->
-                    Recursion.base { text = "", options = [] }
+                    Recursion.base { text = "", options = [], setTown = Nothing }
 
                 (FlagSpot _) :: tail ->
                     Recursion.recurse tail
@@ -199,6 +212,12 @@ view dialog =
                     Recursion.recurseThen tail
                         (\data ->
                             Recursion.base { data | text = m ++ "\n" ++ data.text }
+                        )
+
+                (SetTown name) :: tail ->
+                    Recursion.recurseThen tail
+                        (\data ->
+                            Recursion.base { data | setTown = Just name }
                         )
         )
         dialog.current
