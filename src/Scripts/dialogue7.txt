@@ -1,0 +1,35 @@
+[goto T]//Dialoog 7 Rome (Bij de paus) (toets)
+//missionaris Elias
+[T]Ik ben heel erg benieuwd om te horen welke kennis je hebt vergaard op je reis. Ik heb zelf gelukkig ook een knecht op pad gestuurd met dezelfde missie en ik ga nu kijken of de informatie overeenkomt met die van mijn knecht. 
+
+[]Wie kwamen namen na de val van het Romeinse Rijk 500-600 het bestuur van de steden vaak op zich?[choice A]Bisschop[choice B]Monnik[choice C]Abt[choice D]de paus
+ 
+[A]Helemaal correct, goed opgelet bij de Bij bisschop Mattheus[][goto Next]
+[B][C][D][goto E]
+[E]Niet helemaal juist. Na de val van het Romeinse Rijk kwam vaak de bisschop uit het gebied aan de macht. Misschien kun je nog een keer langs gaan bij bisschop Mattheus.[][goto Next]  
+
+
+[Next]welke taak valt niet onder die van een monnik op een klooster?[choice Gewonden]Gewonden genezen[choice Boeken]Boeken overschrijven[choice Bidden]Bidden[choice Handelen]Handelen met reizigers
+[Handelen] inderdaad, de monniken zijn geen meesters in handel, maar wel in schrijven en lezen.[][goto Volg]
+[Gewonden][Bidden][Boeken][goto H]
+[H]helaas klopt dit niet. In de dagbesteding van monniken komt handelen niet voor. Broeder Thomas zou je dit nog wel een keer kunnen uitleggen.[][goto Volg]  
+
+[Volg]Wat is de verzamelnaam voor iedereen die besluit zijn leven te wijden aan God?[choice Leken]Leken[choice Geestelijke]Geestelijke[choice Christenen]Christenen[choice Monniken]Monniken
+ 
+[Geestelijke]deze mensen zijn inderdaad geestelijke en behoren tot de christelijke gemeenschap.[][goto Volgende]
+[Christenen][Monniken][Leken][goto O]
+[O]Een veel gemaakte fout, maar deze mensen worden naast de paus en de abt ook geestelijke genoemd. Ze behoren tot de christelijke gemeenschap en zetten hun leven meer in het teken van God dan gewone leken. de abt zou e hier nog meer over kunnen vertellen.[][goto Volgende]  
+
+[Volgende]Waar of niet waar: de kerk helpt de koning met rust en vrede te bewaren, zodat de koning de kerk weer helpt door geld te geven.[choice Waar]Waar[choice Niet]Niet waar
+
+[Waar]dit klopt, deze wisselwerking zorg voor rust en vrede in het land zodat de koning het land beter kan regeren.[]
+[Niet]Het is wel degelijk waar. Deze fijne wisselwerking bestaat al heel lang en zorgt ervoor dat de koning goed zijn werk kan doen en de kerk genoeg geld heeft om haar invloed uit te breiden []
+
+[goto R]//Paus Leo III
+[R]Goed, fantastisch! Ik zie dat jouw kameraad goed werk heeft geleverd Karel. Als beloning voor deze inzet wil ik jouw karel de Grote daarom ook kronen tot keizer.
+[goto L]//Karel de grote
+[L]Wat een eer, maar deze eer wil ik liever niet. Geef het aan een ander die er meer mee wilt doen dan ik.
+[goto Q]//Paus Leo III
+[Q]Nee Karel, Jij bent uitverkoren om voor het eerst in 300 jaar weer het land te regeren als keizer. Al jouw goede inzichten, en nog belangrijker, loyale bestuursleden zorgen ervoor dat deze taak door niemand anders dan jou kan worden uitgevoerd.
+[goto X]//Karel de grote
+[X]Mijn dank is groot Leo. Ik zal mijn best doen om mijn plicht zo goed mogelijk te vervullen.[]Een van mijn eerste doelen is de band met het oosten te versterken.[]Ik zal daarom jou mijn loyale dienaar naar Bagdad sturen om met sjeik koning Haroen al-Rashid  te praten. Ik ben erg benieuwd of hij nog nieuws heeft voor mij.[]Hij is een goede vriend van mij en met een geschenk of twee zorg ik ervoor dat pelgrims de gevaarlijke toch naar het oosten kunnen maken.[]Mijn dank is groot voor alle inzet die je al voor mij hebt getoond. Ga nu snel vriend, want de reis is lang. Als ik nog advies nodig heb, dan zal ik een brief schrijven om te vragen om jouw raad.[end]
