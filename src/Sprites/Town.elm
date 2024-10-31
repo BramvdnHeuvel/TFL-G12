@@ -22,11 +22,17 @@ type alias Model =
     , farm1 : Farm.Model
     , farm2 : Farm.Model
     , selectionBoxCastle : SelectionBox.Model
+    , selectionBoxFarm1 : SelectionBox.Model
+    , selectionBoxFarm2 : SelectionBox.Model
+    , selectionBoxHouses : SelectionBox.Model
     }
 
 
 type Msg
     = OnCastle SelectionBox.Msg
+    | OnSFarm1 SelectionBox.Msg
+    | OnSFarm2 SelectionBox.Msg
+    | OnHouses SelectionBox.Msg
     | OnFarm1 Farm.Msg
     | OnFarm2 Farm.Msg
 
@@ -38,6 +44,9 @@ init =
     , farm1 = Farm.init Farm.defaultInitInput
     , farm2 = Farm.init Farm.defaultInitInput
     , selectionBoxCastle = SelectionBox.init
+    , selectionBoxFarm1 = SelectionBox.init
+    , selectionBoxFarm2 = SelectionBox.init
+    , selectionBoxHouses = SelectionBox.init
     }
 
 
@@ -52,6 +61,27 @@ update msg model =
             case SelectionBox.update m model.selectionBoxCastle of
                 mdl ->
                     ( { model | selectionBoxCastle = mdl }
+                    , Cmd.none
+                    )
+        
+        OnSFarm1 m ->
+            case SelectionBox.update m model.selectionBoxFarm1 of
+                mdl ->
+                    ( { model | selectionBoxFarm1 = mdl }
+                    , Cmd.none
+                    )
+        
+        OnSFarm2 m ->
+            case SelectionBox.update m model.selectionBoxFarm2 of
+                mdl ->
+                    ( { model | selectionBoxFarm2 = mdl }
+                    , Cmd.none
+                    )
+        
+        OnHouses m ->
+            case SelectionBox.update m model.selectionBoxHouses of
+                mdl ->
+                    ( { model | selectionBoxHouses = mdl }
                     , Cmd.none
                     )
 
@@ -95,6 +125,9 @@ view :
     { height : Float
     , model : Model
     , onClickCastle : msg
+    , onClickSeedSeller : msg
+    , onClickPope : msg
+    , onClickHouses : msg
     , toMsg : Msg -> msg
     , width : Float
     , x : Float
@@ -131,12 +164,34 @@ view data =
         , house1 { x = 0.3, y = 0.425 }
         , house1 { x = 0.15, y = 0.5 }
         , house1 { x = 0.25, y = 0.55 }
+        , SelectionBox.selectionBox
+            { color = Color.rgba 0 0 0 0.1
+            , colorHover = Color.rgba 0 0 0 0.25
+            , height = 0.25 + 0.05
+            , model = data.model.selectionBoxHouses
+            , onClick = data.onClickHouses
+            , toMsg = OnHouses >> data.toMsg
+            , width = 0.26 + 0.05
+            , x = 0.15 - 0.025
+            , y = 0.44 - 0.025
+            }
         , Farm.view
             { height = 0.15
             , model = data.model.farm1
             , width = 0.3
             , x = 0.1
             , y = 0.8
+            }
+        , SelectionBox.selectionBox
+            { color = Color.rgba 0 0 0 0.1
+            , colorHover = Color.rgba 0 0 0 0.25
+            , height = 0.15 + 0.05
+            , model = data.model.selectionBoxFarm1
+            , onClick = data.onClickPope
+            , toMsg = OnSFarm1 >> data.toMsg
+            , width = 0.3 + 0.05
+            , x = 0.1 - 0.025
+            , y = 0.8 - 0.025
             }
         , Farm.view
             { height = 0.15
@@ -146,6 +201,17 @@ view data =
             , y = 0.7
             }
         , house1 { x = 0.8, y = 0.8 }
+        , SelectionBox.selectionBox
+            { color = Color.rgba 0 0 0 0.1
+            , colorHover = Color.rgba 0 0 0 0.25
+            , height = 0.15 + 0.25 + 0.05
+            , model = data.model.selectionBoxFarm2
+            , onClick = data.onClickSeedSeller
+            , toMsg = OnSFarm2 >> data.toMsg
+            , width = 0.3 + 0.05
+            , x = 0.65 - 0.025
+            , y = 0.7 - 0.025
+            }
         ]
 
 

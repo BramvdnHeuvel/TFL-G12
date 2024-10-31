@@ -46,6 +46,9 @@ type alias Model =
 
 type Msg
     = OnClickCastle
+    | OnClickHouses
+    | OnClickPope
+    | OnClickSeedSeller
     | OnDialogScreen Dialog.Msg
     | OnPigScreen Farm.Msg
     | OnTownScreen Town.Msg
@@ -84,39 +87,59 @@ init () =
 
 -- UPDATE
 
+loadDialog : String -> String -> ( Model, Cmd Msg )
+loadDialog face source =
+    case Dialog.init face source of
+        ( mdl, cmd ) ->
+            ( { flavor = Theme.Latte
+            , height = 480
+            , screen = DialogScreen mdl
+            , width = 720
+            }
+            , Browser.Dom.getViewport
+                |> Task.perform
+                    (\viewport ->
+                        ScreenSize
+                            { height = floor viewport.viewport.height
+                            , width = floor viewport.viewport.width
+                            }
+                    )
+                |> List.singleton
+                |> List.append [ Cmd.map OnDialogScreen cmd ]
+                |> Cmd.batch
+            )
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        OnClickSeedSeller ->
+            loadDialog "/static/villager_image.png" "seed_seller.txt"
+        
         OnClickCastle ->
-            case Dialog.init "seed_seller.txt" of
-                ( mdl, cmd ) ->
-                    ( { flavor = Theme.Latte
-                      , height = 480
-                      , screen = DialogScreen mdl
-                      , width = 720
-                      }
-                    , Browser.Dom.getViewport
-                        |> Task.perform
-                            (\viewport ->
-                                ScreenSize
-                                    { height = floor viewport.viewport.height
-                                    , width = floor viewport.viewport.width
-                                    }
-                            )
-                        |> List.singleton
-                        |> List.append [ Cmd.map OnDialogScreen cmd ]
-                        |> Cmd.batch
-                    )
+            loadDialog "/static/king.png" "test.txt"
+
+        OnClickPope ->
+            loadDialog "/static/villager_image.png" "seed_seller.txt"
+        
+        OnClickHouses ->
+            loadDialog "/static/villager_image.png" "seed_seller.txt"
 
         OnDialogScreen m ->
             case model.screen of
                 DialogScreen mdl ->
                     case Dialog.update m mdl of
                         ( newMdl, cmd ) ->
-                            ( { model | screen = DialogScreen newMdl }
-                            , Cmd.map OnDialogScreen cmd
-                            )
+                            case newMdl.dialog of
+                                Just _ ->
+                                    ( { model | screen = DialogScreen newMdl }
+                                    , Cmd.map OnDialogScreen cmd
+                                    )
+                                
+                                Nothing ->
+                                    ( { model | screen = TownScreen Town.init }
+                                    , Cmd.none
+                                    )
 
                 _ ->
                     ( model, Cmd.none )
@@ -211,7 +234,10 @@ view model =
                 Town.view
                     { height = model.height
                     , model = mdl
+                    , onClickSeedSeller = OnClickSeedSeller
                     , onClickCastle = OnClickCastle
+                    , onClickPope = OnClickPope
+                    , onClickHouses = OnClickHouses
                     , toMsg = OnTownScreen
                     , width = model.width
                     }

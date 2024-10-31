@@ -21,7 +21,7 @@ import Theme
 
 
 type alias Model =
-    { dialog : Maybe S.DialogState, text : String }
+    { face : String, dialog : Maybe S.DialogState, text : String }
 
 
 type Msg
@@ -31,9 +31,9 @@ type Msg
     | SetText String
 
 
-init : String -> ( Model, Cmd Msg )
-init scriptName =
-    ( { dialog = Nothing, text = "" }
+init : String -> String -> ( Model, Cmd Msg )
+init face scriptName =
+    ( { face = face, dialog = Nothing, text = "" }
     , D.downloadScript { name = scriptName, toMsg = OnDownloadScript }
     )
 
@@ -143,7 +143,7 @@ view data =
     in
     Element.column []
         [ Element.row []
-            [ viewNPC { height = topSectionHeight, width = data.width }
+            [ viewNPC { face = data.model.face, height = topSectionHeight, onClick = data.toMsg ClickDialog, width = data.width }
             ]
         , Element.el
             [ Element.height (Element.px middleSectionHeight)
@@ -153,7 +153,8 @@ view data =
             (Element.text dialogText)
 
         -- Show dialog text here
-        , Element.row []
+        , Element.row
+            []
             [ viewOptions
                 { buttonColor = data.buttonColor
                 , model = Just { options = options, text = dialogText } -- Pass options and text
@@ -264,11 +265,10 @@ viewDebugScreen data =
                     ]
 
 
-viewNPC : { height : Int, width : Int } -> Element msg
+viewNPC : { face : String, height : Int, onClick : msg, width : Int } -> Element msg
 viewNPC data =
     let
-        characterImage =
-            "/Users/ivansladonja/Documents/TFL-G12/src/Images/villager_image.png"
+        characterImage = data.face
 
         -- Update with the correct path to your uploaded image
         -- Use Element.Background.image to create a background image style
@@ -279,7 +279,7 @@ viewNPC data =
         padding =
             10
     in
-    Element.row []
+    Element.row [ Element.Events.onClick data.onClick ]
         [ Element.el
             [ Element.height (Element.px data.height)
             , Element.width (Element.px data.width)
@@ -288,15 +288,6 @@ viewNPC data =
             , Element.padding padding
             ]
             (Element.text "")
-
-        -- Replace with any text or element
-        , Element.el
-            [ Element.height (Element.px (data.height - 20))
-            , Element.width (Element.px 150)
-            , Element.padding padding
-            , Element.Border.rounded 10 -- Optional: rounded corners for this element as well
-            ]
-            (Element.text "This is the character's dialogue.")
 
         -- Pass a single Element here
         ]

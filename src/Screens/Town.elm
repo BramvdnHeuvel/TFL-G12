@@ -53,6 +53,9 @@ view :
     { height : Int
     , model : Model
     , onClickCastle : msg
+    , onClickHouses : msg
+    , onClickPope : msg
+    , onClickSeedSeller : msg
     , toMsg : Msg -> msg
     , width : Int
     }
@@ -66,6 +69,9 @@ view data =
                 { height = 1
                 , model = data.model
                 , onClickCastle = data.onClickCastle
+                , onClickHouses = data.onClickHouses
+                , onClickPope = data.onClickPope
+                , onClickSeedSeller = data.onClickSeedSeller
                 , toMsg = data.toMsg
                 , width = 1
                 , x = 0

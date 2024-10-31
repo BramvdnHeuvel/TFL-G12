@@ -74,18 +74,18 @@ dialogSectionParser =
                 |. P.symbol "]"
                 |. P.spaces
                 |. messageParser
-            , P.succeed (\t m -> [ SetTown t, Message m ])
-                |. P.keyword "set-town"
-                |. P.spaces
-                |= P.variable
-                    { start = Char.isAlpha
-                    , inner = Char.isAlphaNum
-                    , reserved = Set.empty
-                    }
-                |. P.spaces
-                |. P.symbol "]"
-                |. P.spaces
-                |= messageParser
+            -- , P.succeed (\t m -> [ SetTown t, Message m ])
+            --     |. P.keyword "set-town"
+            --     |. P.spaces
+            --     |= P.variable
+            --         { start = Char.isAlpha
+            --         , inner = Char.isAlphaNum
+            --         , reserved = Set.empty
+            --         }
+            --     |. P.spaces
+            --     |. P.symbol "]"
+            --     |. P.spaces
+            --     |= messageParser
 
             -- NOTE: Ignored because nothing happens after a goto
             , P.succeed (\m -> [ EndOfSentence, Message m ])
