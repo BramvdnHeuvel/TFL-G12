@@ -52,6 +52,7 @@ paddingSize =
 view :
     { height : Int
     , model : Model
+    , onClickCastle : msg
     , toMsg : Msg -> msg
     , width : Int
     }
@@ -64,6 +65,8 @@ view data =
             Town.view
                 { height = 1
                 , model = data.model
+                , onClickCastle = data.onClickCastle
+                , toMsg = data.toMsg
                 , width = 1
                 , x = 0
                 , y = 0

@@ -130,7 +130,10 @@ view data =
                     S.view ds
 
                 Nothing ->
-                    { text = "When was columbus born?", options = [ ( "option1", "1451" ), ( "option2", "1492" ), ( "option3", "1506" ), ( "option4", "1510" ) ] }
+                    { text = "When was columbus born?"
+                    , options = [ ( "option1", "1451" ), ( "option2", "1492" ), ( "option3", "1506" ), ( "option4", "1510" ) ]
+                    , setTown = Nothing
+                    }
 
         dialogText =
             dialogState.text
