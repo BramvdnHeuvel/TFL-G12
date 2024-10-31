@@ -64,10 +64,10 @@ type Screen
 init : () -> ( Model, Cmd Msg )
 init () =
     ( { flavor = Theme.Latte
-        , height = 480
-        , screen = TownScreen Town.init
-        , width = 720
-        }
+      , height = 480
+      , screen = TownScreen Town.init
+      , width = 720
+      }
     , Browser.Dom.getViewport
         |> Task.perform
             (\viewport ->
@@ -92,10 +92,10 @@ update msg model =
             case Dialog.init "seed_seller.txt" of
                 ( mdl, cmd ) ->
                     ( { flavor = Theme.Latte
-                    , height = 480
-                    , screen = DialogScreen mdl
-                    , width = 720
-                    }
+                      , height = 480
+                      , screen = DialogScreen mdl
+                      , width = 720
+                      }
                     , Browser.Dom.getViewport
                         |> Task.perform
                             (\viewport ->
@@ -108,7 +108,7 @@ update msg model =
                         |> List.append [ Cmd.map OnDialogScreen cmd ]
                         |> Cmd.batch
                     )
-        
+
         OnDialogScreen m ->
             case model.screen of
                 DialogScreen mdl ->
