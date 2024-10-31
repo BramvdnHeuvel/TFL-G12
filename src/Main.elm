@@ -45,7 +45,8 @@ type alias Model =
 
 
 type Msg
-    = OnDialogScreen Dialog.Msg
+    = OnClickCastle
+    | OnDialogScreen Dialog.Msg
     | OnPigScreen Farm.Msg
     | OnTownScreen Town.Msg
     | ScreenSize { height : Int, width : Int }
@@ -62,25 +63,22 @@ type Screen
 
 init : () -> ( Model, Cmd Msg )
 init () =
-    case Dialog.init "seed_seller.txt" of
-        ( mdl, cmd ) ->
-            ( { flavor = Theme.Latte
-              , height = 480
-              , screen = DialogScreen mdl
-              , width = 720
-              }
-            , Browser.Dom.getViewport
-                |> Task.perform
-                    (\viewport ->
-                        ScreenSize
-                            { height = floor viewport.viewport.height
-                            , width = floor viewport.viewport.width
-                            }
-                    )
-                |> List.singleton
-                |> List.append [ Cmd.map OnDialogScreen cmd ]
-                |> Cmd.batch
+    ( { flavor = Theme.Latte
+        , height = 480
+        , screen = TownScreen Town.init
+        , width = 720
+        }
+    , Browser.Dom.getViewport
+        |> Task.perform
+            (\viewport ->
+                ScreenSize
+                    { height = floor viewport.viewport.height
+                    , width = floor viewport.viewport.width
+                    }
             )
+        |> List.singleton
+        |> Cmd.batch
+    )
 
 
 
@@ -90,6 +88,27 @@ init () =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        OnClickCastle ->
+            case Dialog.init "seed_seller.txt" of
+                ( mdl, cmd ) ->
+                    ( { flavor = Theme.Latte
+                    , height = 480
+                    , screen = DialogScreen mdl
+                    , width = 720
+                    }
+                    , Browser.Dom.getViewport
+                        |> Task.perform
+                            (\viewport ->
+                                ScreenSize
+                                    { height = floor viewport.viewport.height
+                                    , width = floor viewport.viewport.width
+                                    }
+                            )
+                        |> List.singleton
+                        |> List.append [ Cmd.map OnDialogScreen cmd ]
+                        |> Cmd.batch
+                    )
+        
         OnDialogScreen m ->
             case model.screen of
                 DialogScreen mdl ->
@@ -192,6 +211,7 @@ view model =
                 Town.view
                     { height = model.height
                     , model = mdl
+                    , onClickCastle = OnClickCastle
                     , toMsg = OnTownScreen
                     , width = model.width
                     }

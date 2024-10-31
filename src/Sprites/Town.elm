@@ -7,6 +7,7 @@ import Color exposing (Color)
 import Sprites.Castle as Castle
 import Sprites.Farm as Farm
 import Sprites.House as House
+import Sprites.SelectionBox as SelectionBox
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
 
@@ -20,11 +21,13 @@ type alias Model =
     , colorCastleWall : Color
     , farm1 : Farm.Model
     , farm2 : Farm.Model
+    , selectionBoxCastle : SelectionBox.Model
     }
 
 
 type Msg
-    = OnFarm1 Farm.Msg
+    = OnCastle SelectionBox.Msg
+    | OnFarm1 Farm.Msg
     | OnFarm2 Farm.Msg
 
 
@@ -34,6 +37,7 @@ init =
     , colorCastleWall = Castle.defaultGrayStoneColor
     , farm1 = Farm.init Farm.defaultInitInput
     , farm2 = Farm.init Farm.defaultInitInput
+    , selectionBoxCastle = SelectionBox.init
     }
 
 
@@ -44,6 +48,13 @@ init =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        OnCastle m ->
+            case SelectionBox.update m model.selectionBoxCastle of
+                mdl ->
+                    ( { model | selectionBoxCastle = mdl }
+                    , Cmd.none
+                    )
+
         OnFarm1 m ->
             case Farm.update m model.farm1 of
                 ( mdl, cmd ) ->
@@ -83,11 +94,13 @@ paddingSize =
 view :
     { height : Float
     , model : Model
+    , onClickCastle : msg
+    , toMsg : Msg -> msg
     , width : Float
     , x : Float
     , y : Float
     }
-    -> Svg svg
+    -> Svg msg
 view data =
     g
         [ transformStandard data ]
@@ -99,6 +112,17 @@ view data =
             , width = 0.3
             , x = 0.35
             , y = 0.1
+            }
+        , SelectionBox.selectionBox
+            { color = Color.rgba 0 0 0 0.1
+            , colorHover = Color.rgba 0 0 0 0.25
+            , height = 0.75 * 0.3 + 0.05
+            , model = data.model.selectionBoxCastle
+            , onClick = data.onClickCastle
+            , toMsg = OnCastle >> data.toMsg
+            , width = 0.3 + 0.05
+            , x = 0.35 - 0.025
+            , y = 0.1 - 0.025
             }
         , house1 { x = 0.25, y = 0.225 }
         , house1 { x = 0.05, y = 0.25 }

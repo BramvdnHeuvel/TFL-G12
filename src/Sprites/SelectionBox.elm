@@ -56,7 +56,10 @@ selectionBox :
     -> Svg msg
 selectionBox data =
     rect
-        [ transformStandard data
+        [ height (String.fromFloat data.height)
+        , width (String.fromFloat data.width)
+        , x (String.fromFloat data.x)
+        , y (String.fromFloat data.y)
         , (if data.model then
             data.colorHover
 
