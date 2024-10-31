@@ -150,7 +150,7 @@ view data =
             , Element.width (Element.px data.width)
             , Element.Background.color (Theme.yellowUI flavor)
             ]
-            (Element.text dialogText)
+            (Element.paragraph [] [(Element.text dialogText)])
 
         -- Show dialog text here
         , Element.row

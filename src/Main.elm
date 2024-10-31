@@ -118,13 +118,13 @@ update msg model =
             loadDialog "/static/villager_image.png" "seed_seller.txt"
 
         OnClickCastle ->
-            loadDialog "/static/king.png" "test.txt"
+            loadDialog "/static/king.png" "dialog_1_eng.txt"
 
         OnClickPope ->
-            loadDialog "/static/villager_image.png" "seed_seller.txt"
+            loadDialog "/static/pope.png" "dialog_2_eng.txt"
 
         OnClickHouses ->
-            loadDialog "/static/villager_image.png" "seed_seller.txt"
+            loadDialog "/static/nun.png" "dialog_7_nl.txt"
 
         OnDialogScreen m ->
             case model.screen of

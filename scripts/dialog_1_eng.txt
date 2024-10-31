@@ -1,0 +1,13 @@
+[goto S]//Screen that you are in 799 AD
+//Dialogue 1 Aachen
+//Charlemagne
+[S]Greetings comrade, my name is Charlemagne.[]
+You probably know me from my many victories on the battlefield.[]
+I defeated the barbarian Franks several times and thereby acquired a great empire.[]
+They also call me "Pater Europae", which means father Europe. I introduced my own currency and designed my own script: the Carolingian minuscule, with the most beautiful letters, if I may say so myself haha.[]
+I always try to gain new knowledge. For example, I learned to read and speak different languages. I am also skilled in the study of mathematics and astronomy.[]
+Because my empire is so large, I cannot rule it on my own. I have many people who help me rule the country.[]
+Recently, however, one of my counselors was murdered and I am now looking for a replacement for this important role.[]
+Now it is that I urgently need help! I have just received a letter from Rome and I could use someone like you to help me.[]
+A good friend of mine, Pope Leo III is being held captive there and I must gather brave knights to free him.[]
+Come with me to Rome and help me free Pope Leo III.[end]
